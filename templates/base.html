@@ -1,0 +1,21 @@
+<!-- base.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+        <!-- tailwind.config.js dont forget this file-->
+        <title>
+            {% block title %}
+                base.html title
+            {% endblock title %}
+        </title>
+    </head>
+    <body>
+        {% block content %}
+            base.html content
+        {% endblock content %}
+    </body>
+</html>
