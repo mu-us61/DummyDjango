@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Article
+from django.contrib import messages
 
 # Create your views here.
 
@@ -31,7 +32,9 @@ def home(request):
         # if no errors complete the form and save the Article
         if not errors:
             Article.objects.create(title=title, description=description)
-            return render(request, "success.html")
+            messages.success(request, "the article created successfully")
+            # return render(request, "success.html")
+            return redirect("home")
 
     articles = Article.objects.all()
     context = {
