@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}
+    delete
+{% endblock title %}
+{% block content %}
+    <p>{{ article.title }} silmek istediginizden eminmisiniz?</p>
+    <form action="" method="post">
+        {% csrf_token %}
+        <button type="submit">Sil</button>
+    </form>
+    <a href="{% url 'read' article.id %}">Geri don</a>
+{% endblock content %}
