@@ -19,13 +19,13 @@ def home(request):
     # start = (page - 1) * items_per_page
     # stop = page * items_per_page
     # current_page_articles = articles[start:stop]
-    total_articles = articles.count()  # Efficiently count total articles
-    total_pages = (total_articles + items_per_page - 1) // items_per_page
+    # total_articles = articles.count()  # Efficiently count total articles
+    # total_pages = (total_articles + items_per_page - 1) // items_per_page
 
     context = {
         "articles": current_page_articles,
-        "current_page": page,
-        "total_pages": total_pages,
+        # "current_page": page,
+        # "total_pages": total_pages,
     }
 
     return render(request, "home.html", context=context)
