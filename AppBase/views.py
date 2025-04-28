@@ -3,29 +3,26 @@ from .models import Article
 from .forms import ArticleForm
 from django.contrib import messages
 from django.core.paginator import Paginator
+from django.db.models import Q
 
 
-# Create your views here.
 def home(request):
     page = request.GET.get("page", 1)
     items_per_page = 10
     articles = Article.objects.order_by("id")  # Order by newest first (-id)
+
+    query = request.GET.get("q", "")
+    if query:
+        articles = articles.filter(Q(title__icontains=query) | Q(description__icontains=query))
+
     paginator = Paginator(articles, items_per_page)
     try:
         current_page_articles = paginator.page(page)
     except Exception:
         current_page_articles = paginator.page(1)
 
-    # start = (page - 1) * items_per_page
-    # stop = page * items_per_page
-    # current_page_articles = articles[start:stop]
-    # total_articles = articles.count()  # Efficiently count total articles
-    # total_pages = (total_articles + items_per_page - 1) // items_per_page
-
     context = {
         "articles": current_page_articles,
-        # "current_page": page,
-        # "total_pages": total_pages,
     }
 
     return render(request, "home.html", context=context)

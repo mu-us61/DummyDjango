@@ -10,6 +10,17 @@
             {% for message in messages %}<p>{{ message }}</p>{% endfor %}
         </div>
     {% endif %}
+    <!-- Search Section -->
+    <div>
+        <form method="get" class="mb-4">
+            <input type="text"
+                   name="q"
+                   placeholder="Search articles..."
+                   value="{{ request.GET.q }}"
+                   class="border p-2 rounded">
+            <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded">Search</button>
+        </form>
+    </div>
     <!-- Articles Section -->
     {% if articles %}
         <div class="max-w-md mx-auto mt-8">
