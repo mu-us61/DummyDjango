@@ -25,4 +25,23 @@
             </ul>
         </div>
     {% endif %}
+    <!-- Pagination Navigation -->
+    <div class="flex justify-center items-center mt-8 space-x-2">
+        <!-- Previous Button -->
+        {% if current_page > 1 %}
+            <a href="?page={{ current_page|add:'-1' }}"
+               class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition-colors">Previous</a>
+        {% else %}
+            <span class="px-4 py-2 bg-gray-100 text-gray-400 rounded-md cursor-not-allowed">Previous</span>
+        {% endif %}
+        <!-- Current Page Indicator -->
+        <span class="px-4 py-2 bg-gray-100 text-gray-700 rounded-md">Page {{ current_page }} of {{ total_pages }}</span>
+        <!-- Next Button -->
+        {% if current_page < total_pages %}
+            <a href="?page={{ current_page|add:'1' }}"
+               class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition-colors">Next</a>
+        {% else %}
+            <span class="px-4 py-2 bg-gray-100 text-gray-400 rounded-md cursor-not-allowed">Next</span>
+        {% endif %}
+    </div>
 {% endblock content %}
