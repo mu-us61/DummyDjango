@@ -50,7 +50,6 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "AppAuth.middleware.AuthMiddleware",
 ]
 
 ROOT_URLCONF = "DummyDjango.urls"
@@ -132,3 +131,8 @@ STATICFILES_DIRS = [
 ]
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "mediafiles"
+
+
+LOGIN_REDIRECT_URL = "home"  # where user goes after login
+LOGOUT_REDIRECT_URL = "home"  # where user goes after logout
+LOGIN_URL = "login"  # used by @login_required
