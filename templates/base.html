@@ -20,12 +20,15 @@
                     <!-- Logo -->
                     <div class="flex-shrink-0">
                         <a href="/" class="text-indigo-600 font-bold text-lg">MySite</a>
+                        {% if user %}welcome {{ user.username }}{% endif %}
                     </div>
                     <!-- Desktop Navigation -->
                     <div class="flex space-x-6">
                         <a href="{% url 'create' %}" class="text-gray-700 hover:text-indigo-500">Create</a>
-                        <a href="#" class="text-gray-700 hover:text-indigo-500">Dummy Link 2</a>
-                        <a href="#" class="text-gray-700 hover:text-indigo-500">Dummy Link 3</a>
+                        <a href="{% url 'logout' %}" class="text-gray-700 hover:text-indigo-500">Logout</a>
+                        <a href="{% url 'login' %}" class="text-gray-700 hover:text-indigo-500">Login</a>
+                        <a href="{% url 'register' %}"
+                           class="text-gray-700 hover:text-indigo-500">Register</a>
                     </div>
                 </div>
             </div>

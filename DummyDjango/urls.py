@@ -23,6 +23,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("AppBase.urls")),
+    path("auth/", include("AppAuth.urls")),
 ]
 
 # Serve static and media files during development
