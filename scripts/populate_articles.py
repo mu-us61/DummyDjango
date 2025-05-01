@@ -13,13 +13,14 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "DummyDjango.settings")  # Repla
 django.setup()
 
 from AppBase.models import Article  # Replace 'myapp' with your app name
+from AppClass.models import Post
 
 # Initialize Faker
 fake = Faker()
 
 # Create 100 articles with random titles and descriptions
 for _ in range(100):
-    Article.objects.create(
+    Post.objects.create(
         title=fake.sentence(nb_words=5),  # Random title with 5 words
         description=fake.paragraph(nb_sentences=3),  # Random description with 3 sentences
     )

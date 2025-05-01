@@ -24,6 +24,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("AppBase.urls")),
     path("auth/", include("AppAuth.urls")),
+    path("class/", include("AppClass.urls")),
 ]
 
 # Serve static and media files during development
