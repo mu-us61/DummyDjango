@@ -31,14 +31,15 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "AppAuth",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "widget_tweaks",
     "AppBase",
-    "AppAuth",
     "AppClass",
 ]
 
@@ -135,5 +136,5 @@ MEDIA_ROOT = BASE_DIR / "mediafiles"
 
 
 LOGIN_REDIRECT_URL = "home"  # where user goes after login
-LOGOUT_REDIRECT_URL = "home"  # where user goes after logout
+# LOGOUT_REDIRECT_URL = "home"  # where user goes after logout
 LOGIN_URL = "login"  # used by @login_required

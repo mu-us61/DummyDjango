@@ -1,0 +1,6 @@
+are you sure to delete "{{ object.title }}"
+<form action="" method="post">
+    {% csrf_token %}
+    <button type="submit">Yes, delete</button>
+    <a href="{% url 'post_detail' object.id %}">back</a>
+</form>

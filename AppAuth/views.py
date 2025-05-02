@@ -1,6 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages  # TODO gercekten burasimi yeri kontrol et
 from django.contrib.auth import get_user_model, authenticate, login as auth_login, logout as auth_logout
+from django.views.generic import CreateView
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.views import LoginView, LogoutView
+from django.urls import reverse_lazy
 
 User = get_user_model()
 # Create your views here.
@@ -20,6 +24,12 @@ def register(request):
             messages.success(request, "user is registered successfully")
             return redirect("home")
     return render(request, "AppAuth/register.html")
+
+
+class RegisterView(CreateView):
+    form_class = UserCreationForm
+    success_url = reverse_lazy("home")
+    template_name = "AppAuth/register.html"
 
 
 def login(request):
@@ -50,9 +60,25 @@ def login(request):
     return render(request, "AppAuth/login.html")
 
 
+class LoginView(LoginView):
+    # template_name = 'myapp/login.html'  # custom template path
+    redirect_authenticated_user = True  # auto redirect logged-in users
+    # success_url = reverse_lazy("home")  # optional: force redirect URL
+
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     context['title'] = 'My Awesome Login Page'
+    #     return context
+
+
 def logout(request):
     auth_logout(request)
     # request.session.flush()  # Clear session data
     # del request.session['user_id']  # alternative ?  but will this delete ? because in mdiddleware ?
     messages.info(request, "user has logged out")
     return redirect("home")
+
+
+class LogoutView(LogoutView):
+    pass
+    # template_name = "registration/logged_out.html"

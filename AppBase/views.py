@@ -5,6 +5,8 @@ from django.contrib import messages
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
+from django.views.generic.edit import FormView
+from django.urls import reverse_lazy
 
 
 def home(request):
@@ -41,6 +43,17 @@ def create(request):
 
     context = {"form": form}
     return render(request, "create.html", context=context)
+
+
+class CreateView(FormView):
+    form_class = ArticleForm
+    template_name = "create.html"
+    success_url = reverse_lazy("home")
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        messages.success(self.request, "AArticle succesfully created")
+        return response
 
 
 def read(request, id):

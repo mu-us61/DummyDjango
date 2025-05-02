@@ -1,14 +1,39 @@
 {% extends 'base.html' %}
+{% load widget_tweaks %}
 {% block title %}
     register page
 {% endblock title %}
 {% block content %}
-    <form action="" method="post">
+    <!-- templates/registration/register.html -->
+    <form method="post"
+          class="max-w-md mx-auto mt-10 p-6 bg-white rounded shadow">
         {% csrf_token %}
-        <label for="username">Username</label>
-        <input type="text" name="username" id="username">
-        <label for="password">Password</label>
-        <input type="password" name="password" id="Password">
-        <button type="submit">Submit</button>
+        <h2 class="text-2xl font-semibold mb-4">Register</h2>
+        {% if form.non_field_errors %}
+            <div class="mb-4 text-red-500">
+                {% for error in form.non_field_errors %}<p>{{ error }}</p>{% endfor %}
+            </div>
+        {% endif %}
+        {% for field in form %}
+            <div class="mb-4">
+                <label for="{{ field.id_for_label }}"
+                       class="block text-sm font-medium text-gray-700">
+                    {{ field.label }}
+                    {% if field.field.required %}<span class="text-red-500">*</span>{% endif %}
+                </label>
+                {{ field|add_class:"mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" }}
+                {% if field.help_text %}<div class="mt-1 text-sm text-gray-500">{{ field.help_text|safe }}</div>{% endif %}
+                {% if field.errors %}
+                    <ul class="mt-1 text-sm text-red-600">
+                        {% for error in field.errors %}<li>{{ error }}</li>{% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+        {% endfor %}
+        <button type="submit"
+                class="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition">Register</button>
+        <p class="mt-4 text-center text-sm text-gray-600">
+            Already have an account? <a href="{% url 'login' %}" class="text-blue-600 hover:underline">Login</a>
+        </p>
     </form>
 {% endblock content %}
